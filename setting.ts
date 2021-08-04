@@ -8,7 +8,6 @@ const initConfig = {
 
 const setConfig = (options?: AxiosRequestConfig) => {
   Object.assign(initConfig, options)
-  console.log(initConfig)
 }
 
 

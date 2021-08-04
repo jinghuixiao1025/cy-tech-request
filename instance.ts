@@ -14,4 +14,10 @@ const requestFun = baseFun(request);
 
 type Request = (configObj: ConfigObj) => AxiosPromise;
 
-export { request, requestFun, axiosInstance, ConfigObj, Request };
+export { 
+  request,
+  Request,
+  requestFun,
+  axiosInstance, 
+  ConfigObj, 
+};

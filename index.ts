@@ -1,1 +1,2 @@
-export { request, requestFun, ConfigObj, Request } from "./instance";
+export * from "./setting";
+export * from "./instance";
