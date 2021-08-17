@@ -15,13 +15,6 @@ module.exports = {
     extensions: [".tsx", ".ts", ".js"],
   },
   externals: ["vue", "axios", "element-ui", "qs"],
-  // externals:{
-  //   lodash:{
-  //     // root:'_',
-  //     // commonjs:'lodash'
-
-  //   }
-  // },
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "./lib"),
