@@ -2,7 +2,12 @@
   "compilerOptions": {
     "outDir": "./lib/",
     "noImplicitAny": true,
-    "lib": ["es2015"],
+    "lib": [
+      "esnext",
+      "dom",
+      "dom.iterable",
+      "scripthost"
+    ],
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "module": "es6",
