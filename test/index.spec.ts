@@ -31,7 +31,7 @@ describe("测试request组件", () => {
   it("status=-1时", async function () {
     await request({
       url: "/test1",
-    }).catch((err) => {
+    }).catch((err: any) => {
       expect(err.message).to.include("无权限");
     });
   });
