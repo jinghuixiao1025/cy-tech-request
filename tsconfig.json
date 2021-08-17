@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "./lib/",
+    "outDir": "./dist/",
     "noImplicitAny": true,
     "lib": [
       "esnext",

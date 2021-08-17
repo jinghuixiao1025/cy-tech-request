@@ -16,8 +16,8 @@ module.exports = {
   },
   externals: ["vue", "axios", "element-ui", "qs"],
   output: {
-    filename: "bundle.js",
-    path: path.resolve(__dirname, "./lib"),
+    filename: "request.min.js",
+    path: path.resolve(__dirname, "./dist"),
     library: "library",
     libraryTarget: "umd",
   },
