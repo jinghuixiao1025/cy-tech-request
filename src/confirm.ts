@@ -1,10 +1,6 @@
 import { MessageBox } from "element-ui";
-import { AxiosRequestConfig, AxiosPromise } from "axios";
-
-export interface ConfigObj extends AxiosRequestConfig {
-  q?: string;
-  isFormData?: boolean;
-}
+import { AxiosPromise } from "axios";
+import { ConfigObj } from "./indexa";
 
 export default function makeQuery(request: any | void) {
   return function query(configObj: ConfigObj): AxiosPromise {
@@ -35,7 +31,7 @@ export default function makeQuery(request: any | void) {
             requestFun(configObj);
           })
           .catch(() => {
-            console.log("你取消了弹窗");
+            // console.log("你取消了弹窗");
           });
       } else {
         requestFun(configObj);
