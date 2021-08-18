@@ -1,6 +1,6 @@
 // import { MessageBox } from "element-ui";
 import { AxiosPromise } from "axios";
-import { ConfigObj } from "../index.d";
+import { ConfigObj } from "./index.d";
 
 export default function makeQuery(request: any | void) {
   return function query(configObj: ConfigObj): AxiosPromise {

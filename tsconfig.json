@@ -1,17 +1,14 @@
 {
   "compilerOptions": {
-    "outDir": "./dist/",
-    "noImplicitAny": true,
     "target": "es5",
     "module": "es6",
-    "jsx": "react",
-    "allowJs": true,
-    "moduleResolution":"Node",
+    "moduleResolution": "node",
+    "declaration": true,
+    "outDir": "./.tmp",
+    "strict": true,
     "allowSyntheticDefaultImports": true,
     "lib":[
-      "ES5",
-      "ES6",
-    ],
-
+      "ES6"
+    ]
   }
 }
