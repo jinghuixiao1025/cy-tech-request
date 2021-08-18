@@ -1,0 +1,8 @@
+color: true
+recursive:
+  - "test/**/*.test.ts"
+require:
+  - "core-js"
+  - "regenerator-runtime"
+  - "@babel/preset-typescript"
+  - "@babel/register"

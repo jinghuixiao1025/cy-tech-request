@@ -14,7 +14,7 @@ module.exports = {
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
   },
-  externals: [],
+  externals: ["axios"],
   output: {
     filename: "[name].min.js",
     path: path.resolve(__dirname, "./dist"),
