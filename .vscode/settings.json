@@ -1,7 +1,6 @@
 {
   "editor.tabSize": 2,
   "editor.wordWrap": "on",
-  // "typescript.format.enable": true,
   "javascript.format.enable": false,
   "editor.codeActionsOnSave": {
     "source.fixAll": true,
@@ -11,12 +10,6 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "editor.formatOnSave": true,
-
-  // vetur 只提供语法高亮
-  "vetur.format.defaultFormatter.html": "none",
-  "vetur.format.defaultFormatter.js": "none",
-  "vetur.format.defaultFormatter.scss": "none",
-  "vetur.format.defaultFormatter.css": "none",
 
   "fileheader.Author": "jinghui.xiao",
   "fileheader.LastModifiedBy": "jinghui.xiao"

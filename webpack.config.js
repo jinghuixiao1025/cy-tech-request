@@ -5,7 +5,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.tsx|ts|d.ts?$/,
+        test: /\.ts?$/,
         use: "ts-loader",
         exclude: /node_modules/,
       },
@@ -14,11 +14,11 @@ module.exports = {
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
   },
-  externals: ["vue", "axios", "element-ui", "qs"],
+  externals: [],
   output: {
-    filename: "request.min.js",
+    filename: "[name].min.js",
     path: path.resolve(__dirname, "./dist"),
-    library: "library",
+    library: "request",
     libraryTarget: "umd",
   },
 };
