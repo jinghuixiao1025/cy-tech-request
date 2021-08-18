@@ -1,4 +1,4 @@
-import { MessageBox } from "element-ui";
+// import { MessageBox } from "element-ui";
 import { AxiosPromise } from "axios";
 import { ConfigObj } from "../index.d";
 
@@ -22,17 +22,17 @@ export default function makeQuery(request: any | void) {
       }
 
       if ("q" in configObj) {
-        MessageBox.confirm(configObj.q || "确定继续操作？", "提示", {
-          confirmButtonText: "确定",
-          cancelButtonText: "取消",
-          type: "warning",
-        })
-          .then(() => {
-            requestFun(configObj);
-          })
-          .catch(() => {
-            // console.log("你取消了弹窗");
-          });
+        // MessageBox.confirm(configObj.q || "确定继续操作？", "提示", {
+        //   confirmButtonText: "确定",
+        //   cancelButtonText: "取消",
+        //   type: "warning",
+        // })
+        //   .then(() => {
+        //     requestFun(configObj);
+        //   })
+        //   .catch(() => {
+        //     // console.log("你取消了弹窗");
+        //   });
       } else {
         requestFun(configObj);
       }
