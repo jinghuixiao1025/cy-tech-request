@@ -1,5 +1,6 @@
 import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
 import qs from "qs";
+import { httpCodesConfig } from '../setting';
 // import { Message } from "element-ui";
 // import { UserModule } from "@/store/modules/user";
 
@@ -15,27 +16,42 @@ export interface requestConfig extends AxiosRequestConfig {
 
 function requestValidateStatus(config: requestConfig): any {
   config.validateStatus = (status: number) => {
-    if (status > 499) {
-      // Message({
-      //   message:
-      //     "服务器错误，服务器在处理请求的过程中发生了错误，http状态码：" +
-      //     status,
-      //   type: "error",
-      //   duration: 5 * 1000,
-      //   showClose: true,
-      // });
-      return false;
+    const t = httpCodesConfig.filter(({ code }) => {
+      if (code instanceof Number) {
+        return code === status;
+      }
+      if (code instanceof Array) {
+        let [min, max] = code;
+        return status >= min && status <= max;
+      }
+    })
+    if (t.length > 0) {
+      t[0]
+    } else {
+      return true;
     }
-    if (status > 399 && status < 500) {
-      // Message({
-      //   message:
-      //     "客户端错误，请求包含语法错误或无法完成请求，http状态码：" + status,
-      //   type: "error",
-      //   duration: 5 * 1000,
-      //   showClose: true,
-      // });
-      return false;
-    }
+
+    // if (status > 499) {
+    //   // Message({
+    //   //   message:
+    //   //     "服务器错误，服务器在处理请求的过程中发生了错误，http状态码：" +
+    //   //     status,
+    //   //   type: "error",
+    //   //   duration: 5 * 1000,
+    //   //   showClose: true,
+    //   // });
+    //   return false;
+    // }
+    // if (status > 399 && status < 500) {
+    //   // Message({
+    //   //   message:
+    //   //     "客户端错误，请求包含语法错误或无法完成请求，http状态码：" + status,
+    //   //   type: "error",
+    //   //   duration: 5 * 1000,
+    //   //   showClose: true,
+    //   // });
+    //   return false;
+    // }
     return true;
   };
 
