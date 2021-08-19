@@ -22,37 +22,17 @@ export default function makeQuery(request: any | void) {
       }
 
       if ("q" in configObj) {
-        if (messageConfirm === confirm) {
-          const flag = confirm(configObj.q || "确定继续操作？");
-          if (flag) {
+        messageConfirm(configObj.q || "确定继续操作？", "提示", {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning",
+        })
+          .then(() => {
             requestFun(configObj);
-          } else {
-            // 用户点击了取消
-          }
-        } else {
-          const p: any = messageConfirm(configObj.q || "确定继续操作？");
-          try {
-            p.then(() => {
-              requestFun(configObj);
-            })
-              .catch(() => {
-                // console.log("你取消了弹窗");
-              });
-          } catch (err) {
-            console.log(err)
-          }
-        }
-        // MessageBox.confirm(configObj.q || "确定继续操作？", "提示", {
-        //   confirmButtonText: "确定",
-        //   cancelButtonText: "取消",
-        //   type: "warning",
-        // })
-        //   .then(() => {
-        //     requestFun(configObj);
-        //   })
-        //   .catch(() => {
-        //     // console.log("你取消了弹窗");
-        //   });
+          })
+          .catch(() => {
+            // console.log("你取消了弹窗");
+          });
       } else {
         requestFun(configObj);
       }

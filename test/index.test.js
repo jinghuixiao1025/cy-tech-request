@@ -23,6 +23,16 @@ describe("request 拦截器测试", () => {
       data: {},
       message: "无权限",
     });
+    mock.onGet("/test3").reply(200, {
+      status: -2,
+      data: {},
+      message: "登录失效",
+    });
+    mock.onGet("/test4").reply(200, {
+      status: Math.random(),
+      data: {},
+      message: "error",
+    });
   });
 
   it("status=1时，正常情况下的请求", function (done) {
@@ -30,6 +40,14 @@ describe("request 拦截器测试", () => {
       url: "test",
     }).then((res) => {
       expect(res.a).to.equal(1);
+      done();
+    });
+  });
+  it("status不等于1时，错误情况下的请求", function (done) {
+    request({
+      url: "test4",
+    }).catch((err) => {
+      expect(err.message).to.include("error");
       done();
     });
   });
@@ -42,4 +60,14 @@ describe("request 拦截器测试", () => {
       done();
     });
   });
+
+  it("status=-2时，登录失效的请求", function (done) {
+    request({
+      url: "test3",
+    }).catch((err) => {
+      expect(err.message).to.include("登录失效");
+      done();
+    });
+  });
+
 });

@@ -1,6 +1,6 @@
 import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
 import qs from "qs";
-import { httpCodesConfig, messageBox, responseKey } from '../setting';
+import { httpCodesConfig, messageBox, responseKey, resCodeCheckConfig } from '../setting';
 // import { Message } from "element-ui";
 // import { UserModule } from "@/store/modules/user";
 
@@ -63,8 +63,10 @@ function requestValidateStatus(config: requestConfig): any {
 }
 
 function responseValidateStatus(response: AxiosResponse): any {
-  const res: ResponseBody = response.data;
-
+  const res: any = response.data;
+  const message = res[responseKey.message];
+  const status = res[responseKey.status];
+  const data = res[responseKey.data];
 
   if (response.status !== 200) {
     return false;
@@ -79,36 +81,35 @@ function responseValidateStatus(response: AxiosResponse): any {
       return false;
     }
   }
-  if (res.status !== 1) {
-    if (res.status === -2) {
+
+  if (status !== resCodeCheckConfig.success) {
+    if (status === resCodeCheckConfig.overdue) {
       // 登录过期
-      // Message({
-      //   message: res.message || "登录会话超时，请重新登录！",
-      //   type: "error",
-      //   duration: 2 * 1000,
-      //   onClose: () => {
-      //     // UserModule.FedLogOut().then(() => {
-      //     //   location.reload();
-      //     // });
-      //   },
-      // });
-    } else if (res.status === -1) {
+      messageBox({
+        message: message || "登录会话超时，请重新登录！",
+        type: "error",
+        duration: 2 * 1000,
+        onClose: () => {
+          resCodeCheckConfig.overdueCb()
+        },
+      });
+    } else if (status === resCodeCheckConfig.noPermission) {
       // 接口无权限访问
-      // Message({
-      //   message: "无权限访问！请联系管理员",
-      //   type: "error",
-      //   duration: 5 * 1000,
-      // });
+      messageBox({
+        message: message || "无权限访问！请联系管理员",
+        type: "error",
+        duration: 5 * 1000,
+      });
     } else {
-      // Message({
-      //   message: res.message,
-      //   type: "error",
-      //   duration: 5 * 1000,
-      // });
+      messageBox({
+        message: message,
+        type: "error",
+        duration: 5 * 1000,
+      });
     }
-    throw new Error(res.message);
+    throw new Error(message);
   } else {
-    return res.data;
+    return data;
   }
 }
 
