@@ -1,6 +1,6 @@
 import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
 import qs from "qs";
-import { httpCodesConfig } from '../setting';
+import { httpCodesConfig, messageBox, responseKey } from '../setting';
 // import { Message } from "element-ui";
 // import { UserModule } from "@/store/modules/user";
 
@@ -64,16 +64,18 @@ function requestValidateStatus(config: requestConfig): any {
 
 function responseValidateStatus(response: AxiosResponse): any {
   const res: ResponseBody = response.data;
+
+
   if (response.status !== 200) {
-    return;
+    return false;
   } else {
     if (response.data === "") {
-      // Message({
-      //   message: "响应码200，但服务器未返回任何数据",
-      //   type: "error",
-      //   duration: 5 * 1000,
-      //   showClose: true,
-      // });
+      messageBox({
+        message: "响应码200，但服务器未返回任何数据",
+        type: "error",
+        duration: 5 * 1000,
+        showClose: true,
+      })
       return false;
     }
   }

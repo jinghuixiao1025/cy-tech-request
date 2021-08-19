@@ -8,7 +8,8 @@
     "strict": true,
     "allowSyntheticDefaultImports": true,
     "lib":[
-      "ES6"
+      "ES6",
+      "DOM"
     ]
   }
 }

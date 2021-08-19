@@ -13,7 +13,20 @@ const httpCodesConfig = [
   },
 ]
 
+const messageBox = (config: { message: string | number, type?: string, duration?: number, showClose?: boolean }) => {
+  return alert(config.message)
+};
+const messageConfirm = confirm;
+
+const responseKey = {
+  data: "data",
+  status: "status",
+  message: "message",
+}
 
 export {
-  httpCodesConfig
+  httpCodesConfig,
+  responseKey,
+  messageBox,
+  messageConfirm
 }
