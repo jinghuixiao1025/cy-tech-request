@@ -1,14 +1,6 @@
 import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
 import qs from "qs";
 import { httpCodesConfig, messageBox, responseKey, resCodeCheckConfig } from '../setting';
-// import { Message } from "element-ui";
-// import { UserModule } from "@/store/modules/user";
-
-interface ResponseBody {
-  data: any;
-  message: string;
-  status: number;
-}
 
 export interface requestConfig extends AxiosRequestConfig {
   isFormData?: boolean;
@@ -16,7 +8,7 @@ export interface requestConfig extends AxiosRequestConfig {
 
 function requestValidateStatus(config: requestConfig): any {
   config.validateStatus = (status: number) => {
-    const t = httpCodesConfig.filter(({ code }) => {
+    const t = httpCodesConfig.filter(({ code, pass }) => {
       if (code instanceof Number) {
         return code === status;
       }
@@ -26,33 +18,11 @@ function requestValidateStatus(config: requestConfig): any {
       }
     })
     if (t.length > 0) {
-      t[0]
+      return t[0].pass
     } else {
       return true;
     }
 
-    // if (status > 499) {
-    //   // Message({
-    //   //   message:
-    //   //     "服务器错误，服务器在处理请求的过程中发生了错误，http状态码：" +
-    //   //     status,
-    //   //   type: "error",
-    //   //   duration: 5 * 1000,
-    //   //   showClose: true,
-    //   // });
-    //   return false;
-    // }
-    // if (status > 399 && status < 500) {
-    //   // Message({
-    //   //   message:
-    //   //     "客户端错误，请求包含语法错误或无法完成请求，http状态码：" + status,
-    //   //   type: "error",
-    //   //   duration: 5 * 1000,
-    //   //   showClose: true,
-    //   // });
-    //   return false;
-    // }
-    return true;
   };
 
   // formDate转换
@@ -63,13 +33,8 @@ function requestValidateStatus(config: requestConfig): any {
 }
 
 function responseValidateStatus(response: AxiosResponse): any {
-  const res: any = response.data;
-  const message = res[responseKey.message];
-  const status = res[responseKey.status];
-  const data = res[responseKey.data];
-
   if (response.status !== 200) {
-    return false;
+    throw new Error('状态码不等于200。。');
   } else {
     if (response.data === "") {
       messageBox({
@@ -78,9 +43,14 @@ function responseValidateStatus(response: AxiosResponse): any {
         duration: 5 * 1000,
         showClose: true,
       })
-      return false;
+      throw new Error('响应码200，但服务器未返回任何数据');
     }
   }
+
+  const res: any = response.data;
+  const message = res[responseKey.message];
+  const status = res[responseKey.status];
+  const data = res[responseKey.data];
 
   if (status !== resCodeCheckConfig.success) {
     if (status === resCodeCheckConfig.overdue) {

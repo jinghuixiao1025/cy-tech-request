@@ -1,4 +1,8 @@
 import { AxiosPromise } from "axios";
+const options = {
+  baseURL: "app",
+  timeout: 6000,
+}
 
 const httpCodesConfig = [
   {
@@ -15,10 +19,10 @@ const httpCodesConfig = [
   },
 ]
 
-const messageBox = (config: { message: string | number, type?: string, duration?: number, showClose?: boolean, onClose?: ()=>void }) => {
+const messageBox = (config: { message: string | number, type?: string, duration?: number, showClose?: boolean, onClose?: () => void }) => {
   console.log("提示信息：" + config.message)
 };
-const messageConfirm = function (msg: string, title:string, options: any): AxiosPromise { 
+const messageConfirm = function (msg: string, title: string, options: any): AxiosPromise {
   return new Promise((resolve: any, reject: any) => {
 
   })
@@ -35,7 +39,7 @@ const resCodeCheckConfig = {
   success: 1,
   overdue: -2,
   noPermission: -1,
-  overdueCb: ()=>{}
+  overdueCb: () => { }
 }
 
 export {
@@ -43,5 +47,6 @@ export {
   responseKey,
   resCodeCheckConfig,
   messageBox,
-  messageConfirm
+  messageConfirm,
+  options
 }

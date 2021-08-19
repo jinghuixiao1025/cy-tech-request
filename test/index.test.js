@@ -33,13 +33,22 @@ describe("request 拦截器测试", () => {
       data: {},
       message: "error",
     });
+    mock.onGet("/test5").reply(410);
+    mock.onGet("/test6").reply(510);
   });
 
-  it("status=1时，正常情况下的请求", function (done) {
+  it("网络状态在400-500区间", function (done) {
     request({
-      url: "test",
-    }).then((res) => {
-      expect(res.a).to.equal(1);
+      url: "test5",
+    }).catch((res) => {
+      done();
+    });
+  });
+
+  it("网络状态在510", function (done) {
+    request({
+      url: "test6",
+    }).catch((res) => {
       done();
     });
   });
@@ -69,5 +78,4 @@ describe("request 拦截器测试", () => {
       done();
     });
   });
-
 });
